@@ -15,6 +15,7 @@ new Event({
         { name: 'cow', image: "https://cdn.discordapp.com/emojis/841687836767682570.webp?size=64"},
         { name: 'blaze', image: "https://cdn.discordapp.com/emojis/892103795050418247.webp?size=64"},
         { name: 'spider', image: "https://cdn.discordapp.com/emojis/892103846782967899.webp?size=64"},
+        { name: "star_wither", image: "https://cdn.discordapp.com/emojis/839024300236210176.webp?size=64"},
         { name: 'wither_skeleton', image: "https://cdn.discordapp.com/emojis/1195067597020995665.webp?size=128"},
         { name: 'skeleton', image: 'https://cdn.discordapp.com/emojis/1079777600341286912.gif?size=128'}
       ];

@@ -1,6 +1,7 @@
 import { Command } from "@/discord/base";
 import { returnEmojis, verify_user_exist } from "@/functions";
 import { verify_user_ranks_exist } from "@/functions/economy/user_rank";
+import { verifyUser } from "@/functions/utils/verifyUser";
 import { createEmbed, createRow, findEmoji } from "@magicyan/discord";
 import { ActionRow, ApplicationCommandType, SelectMenuComponentOptionData, StringSelectMenuBuilder, formatEmoji } from "discord.js";
 
@@ -10,8 +11,7 @@ new Command({
     dmPermission,
     type: ApplicationCommandType.ChatInput,
     async run(interaction){
-      await verify_user_exist(interaction)
-      await verify_user_ranks_exist(interaction)
+      await verifyUser(interaction)
       const emoji = findEmoji(interaction.guild).byName("spawners")
       const emojis_functions = await returnEmojis(interaction)
       const list_of_emojis = await emojis_functions?.emojis!

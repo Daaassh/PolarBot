@@ -1,6 +1,7 @@
 import { Command } from "@/discord/base";
 import { get_user_rank, verify_user_exist } from "@/functions";
 import { verify_user_ranks_exist } from "@/functions/economy/user_rank";
+import { verifyUser } from "@/functions/utils/verifyUser";
 import { createEmbed, createEmbedAuthor, createRow, findEmoji } from "@magicyan/discord";
 import { ButtonStyle, formatEmoji } from "discord.js";
 import { ApplicationCommandType, ButtonBuilder } from "discord.js";
@@ -12,8 +13,7 @@ new Command({
     dmPermission,
     type: ApplicationCommandType.ChatInput,
     async run(interaction){
-      await verify_user_exist(interaction)
-      await verify_user_ranks_exist(interaction)
+      await verifyUser(interaction)
       const emoji = formatEmoji(findEmoji(interaction.guild).byName("up")?.id!)
       const rank = await get_user_rank(interaction)
       const rank_verify = rank?.next_rank_verify()
@@ -32,10 +32,17 @@ new Command({
         // ]
       })
       writeFileSync('message_interaction_data.json', JSON.stringify({ userId: interaction.user.id }));
+      const user_rank = rank?.rank_for_user
+      console.log(user_rank)
       
-      const row = createRow(
-        new ButtonBuilder({label: "Evoluir De Rank", style: ButtonStyle.Secondary, customId: `rank-evolve-button`, emoji: emoji})
-      )
-      await interaction.reply({ embeds: [embed], components: [row]})
+      if (user_rank! >= 15) {
+        await interaction.reply({ embeds: [embed]})
+      } else {
+        const row = createRow(
+          new ButtonBuilder({label: "Evoluir De Rank", style: ButtonStyle.Secondary, customId: `rank-evolve-button`, emoji: emoji})
+        )
+        await interaction.reply({ embeds: [embed], components: [row]})
+      }
+      
     }
 });

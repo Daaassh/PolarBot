@@ -29,6 +29,7 @@ export async function get_user_rank(interaction: Interaction){
 
   return {
     rank: ranks[user_rank?.rank - 1],
+    rank_for_user: user_rank.rank,
     next_rank_verify: () => {
       if (user_rank?.rank === ranks.length) return "Maximo | Sem proximo rank"
       return ranks[user_rank?.rank]

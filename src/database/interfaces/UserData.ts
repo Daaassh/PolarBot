@@ -3,6 +3,6 @@ export interface UserData {
         gold: number;
         gems: number
     }
-    guild_id: number;
-    user_id: number;
+    guild_id?: number;
+    user_id: string;
 }

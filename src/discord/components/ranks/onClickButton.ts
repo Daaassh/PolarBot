@@ -12,7 +12,7 @@ new Component({
     const interactionData = JSON.parse(readFileSync('message_interaction_data.json').toString());
 
     if (interaction.user.id == interactionData["userId"]) {
-      verifyAndBuyRank(interaction)
+      await verifyAndBuyRank(interaction)
     }
     else {
       const embed = createEmbed({
